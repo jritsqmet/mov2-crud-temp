@@ -34,14 +34,24 @@ export default function ListaSree() {
     }, [])
 
 
+    type Item={
+        cedula: String,
+        name: String,
+        edad: number,
+        correo: String
+    }
+
 
     return (
         <View>
             <Text>ListaSree</Text>
             <FlatList 
                 data = {datos}
-                renderItem={ ( {item} )=>
-                    <Text>{item.name}</Text>
+                renderItem={ ( {item}:{item: Item} )=>
+                    <View>
+                         <Text>{item.name}</Text>
+                    </View>
+                   
                 }
             />
         </View>

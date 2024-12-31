@@ -1,30 +1,28 @@
 import { Button, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
-import { Snackbar, TextInput } from 'react-native-paper';
-//FIREBASE
-import { ref, set } from 'firebase/database';
-import { db } from '../config/Config';
+import { TextInput } from 'react-native-paper'
 
-export default function FormularioScreen() {
+import { db } from '../config/Config'
+import { ref, update } from 'firebase/database'
+
+export default function EditarScreen() {
 
     const [cedula, setcedula] = useState("")
     const [nombre, setnombre] = useState("")
     const [edad, setedad] = useState(0)
     const [correo, setcorreo] = useState("")
 
-    /////////// ESCRIBIR ///////////////
-    function guardar() {
-        set(ref(db, 'usuarios/' + cedula), {
+    function editar(){
+        update(ref(db, 'usuarios/' + cedula), {
             name: nombre,
             age: edad,
             email: correo
         });
     }
 
-    return (
-        <View>
-            <Text>FormularioScreen</Text>
-            <TextInput
+  return (
+    <View>
+                  <TextInput
                 style={styles.input}
                 onChangeText={(texto) => setcedula(texto)}
                 label="Cédula"
@@ -58,9 +56,9 @@ export default function FormularioScreen() {
 
            
 
-            <Button title='GUARDAR' onPress={() => guardar()} />
-        </View>
-    )
+            <Button title='EDITAR' onPress={() => editar()} />
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
